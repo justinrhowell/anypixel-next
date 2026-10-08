@@ -2,9 +2,12 @@
 
 The first release should help an existing agent improve a real interface and carry useful decisions into the next task. Keep the engine small; add expertise through packs and optional extensions.
 
+## Available now
+
+- Import screenshots and reference documents already available to the host agent, without installing browser tools.
+
 ## Next
 
-- Import screenshots and reference files already available to the host agent.
 - Support authenticated browser capture with explicit handling of local session state.
 - Exercise the full workflow in two actual agent hosts and document working setup, image handling, and cancellation.
 

@@ -5,7 +5,7 @@ import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { Client } from '@modelcontextprotocol/client';
 import { StdioClientTransport } from '@modelcontextprotocol/client/stdio';
-import { project, configureFake, fakeExtension } from './helpers.mjs';
+import { project, configureFake, fakeExtension, editConfig } from './helpers.mjs';
 const cli = fileURLToPath(new URL('../dist/cli/index.js', import.meta.url));
 
 test('official MCP client: discovery, shared core results, working directory and reconnect', async (t) => {
@@ -91,6 +91,21 @@ test('MCP returns image content and propagates cancellation to the operation', a
     });
     assert.equal(read.content[0].type, 'image');
     assert.equal(read.content[0].data, png);
+    await writeFile(path.join(root, 'reference.png'), Buffer.from(png, 'base64'));
+    await editConfig(root, (c) => {
+      c.extensions.push({ module: 'builtin:files', trusted: true });
+    });
+    const imported = await client.callTool({
+      name: 'design_observe',
+      arguments: { observer: 'files/import', input: { path: 'reference.png' } },
+    });
+    const importedCap = imported.structuredContent.result;
+    const importedRead = await client.callTool({
+      name: 'design_read',
+      arguments: { id: importedCap.id, artifact: importedCap.artifacts[0].id },
+    });
+    assert.equal(importedRead.content[0].type, 'image');
+    assert.equal(importedRead.content[0].data, png);
     await writeFile(
       path.join(root, 'extension.mjs'),
       code.replace('async observe(){return', 'async observe(){await new Promise(()=>{});return'),

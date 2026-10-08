@@ -14,9 +14,17 @@ Copy the standalone [custom check](../examples/custom-check/index.mjs) into the 
 
 An extension default-exports `apiVersion`, `id`, `version`, and optional `observers` and `checks`. See [SDK interfaces](../src/sdk/index.ts). Inputs/options use JSON Schema; outputs follow the generated [observation](../schemas/observation.schema.json) and [check-result](../schemas/checkResult.schema.json) schemas. Additional semantic invariants, such as measured evidence references, are enforced by core.
 
+Observers receive `io.projectRoot` (the resolved consumer project), `io.allowedOrigins`, and `io.signal`. These come from the runtime, not observer request fields. Checks receive `io.signal`.
+
 Observers return a bounded array of base64 artifacts with unique local IDs and declared kinds. Core publishes them with capture-qualified IDs, MIME types, sizes, and hashes. Checks receive verified artifacts and options, and return findings plus an execution status. The core stamps check origin/version and rejects references to artifacts that were not supplied.
 
 Workers use a separate Node process, a minimal environment, timeouts, and cancellation. Native extensions remain trusted code with the user's OS permissions; this is not a sandbox. Installing a pack cannot register executable code. The main package includes no browser dependency; the browser extension owns Playwright and axe.
+
+## File import
+
+The bundled `builtin:files` module uses the same worker and extension API as other observers. It is loaded only when configured. `files/import` emits `files/image` for PNG/JPEG or `files/document` for Markdown, UTF-8 text, and JSON. These kinds are distinct from browser measurements.
+
+Paths must be project-relative and resolve inside the project. Directories, escaping symlinks, unsupported formats, empty files, and files over 20 MB are rejected. Image signatures are checked; full image decoding is left to the consumer. The optional description is preserved as `metadata.suppliedDescription`, without claiming verified provenance.
 
 ## Initial browser artifact contracts
 

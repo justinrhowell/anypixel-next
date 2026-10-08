@@ -1,6 +1,6 @@
 import { fork } from 'node:child_process';
 import { createRequire } from 'node:module';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import path from 'node:path';
 import { DesignError, inside } from './files.js';
 import type { Project } from './contracts.js';
@@ -72,9 +72,12 @@ export async function registry(root: string, config: Project, signal?: AbortSign
       throw new DesignError('UNTRUSTED_EXTENSION', `Extension is not trusted: ${entry.module}`);
     let resolved: string;
     try {
-      resolved = entry.module.startsWith('.')
-        ? await inside(root, entry.module)
-        : resolver.resolve(entry.module);
+      resolved =
+        entry.module === 'builtin:files'
+          ? fileURLToPath(new URL('../observers/files.js', import.meta.url))
+          : entry.module.startsWith('.')
+            ? await inside(root, entry.module)
+            : resolver.resolve(entry.module);
     } catch {
       throw new DesignError('MISSING_DEPENDENCY', `Install or correct extension: ${entry.module}`);
     }

@@ -22,12 +22,13 @@
     "README.md",
     "LICENSE",
     "NOTICE",
-    "docs/QUICKSTART.md",
-    "docs/EXTENSIONS.md",
-    "docs/STATUS.md",
     "examples/custom-check",
     "examples/dense-product-ui",
-    "CONTRIBUTING.md"
+    "CONTRIBUTING.md",
+    "docs",
+    "SECURITY.md",
+    "GOVERNANCE.md",
+    "CHANGELOG.md"
   ],
   "workspaces": [
     "extensions/web"

@@ -13,7 +13,7 @@ export interface Extension {
       artifactKinds: string[];
       observe(
         input: Record<string, unknown>,
-        io: { signal: AbortSignal; allowedOrigins: string[] },
+        io: { signal: AbortSignal; allowedOrigins: string[]; projectRoot: string },
       ): Promise<Observation>;
     }
   >;

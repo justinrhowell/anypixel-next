@@ -47,6 +47,7 @@ process.on('message', async (request: any) => {
         value = await observer.observe(request.input, {
           signal: controller.signal,
           allowedOrigins: request.allowedOrigins,
+          projectRoot: request.projectRoot,
         });
       } else {
         const check = extension.checks?.[request.id];

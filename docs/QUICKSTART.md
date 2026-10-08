@@ -26,7 +26,57 @@ npm install --save-dev /tmp/anypixel-next-web-0.1.0-alpha.0.tgz
 npx playwright install chromium
 ```
 
-Add `anypixel-next-web` as a trusted extension and your exact preview origin to `design/project.json`, following the root README. Use `"channel":"chrome"` in an observation request to use installed Google Chrome instead of downloading Chromium. Loading a preview can contact its normal subresources. No browser package is required for context, decisions, or non-browser extensions.
+Add the browser extension, check, and your exact preview origin to `design/project.json`:
+
+```json
+{
+  "schemaVersion": 1,
+  "packs": ["builtin:starter"],
+  "extensions": [{ "module": "anypixel-next-web", "trusted": true }],
+  "checks": [{ "id": "web/axe" }],
+  "allowedOrigins": ["http://localhost:3000"]
+}
+```
+
+Add `.anypixel/` to your project's `.gitignore` to keep local evidence out of commits. Use `"channel":"chrome"` in an observation request to use installed Google Chrome instead of downloading Chromium. Loading a preview can contact its normal subresources. No browser package is required for context, decisions, or non-browser extensions.
+
+## Connect an MCP client
+
+Build or install the package, then register this command in your agent host's MCP configuration:
+
+```sh
+node /absolute/path/to/anypixel-next/dist/cli/index.js mcp --project /absolute/path/to/your/project
+```
+
+Use the absolute Node 24 binary if your host starts with a different Node version. The server exposes `design_context`, `design_observe`, `design_review`, `design_record`, and `design_read`. It uses stdio; no network server or API key is needed. Individual agent hosts still need validation; see [integration status](STATUS.md).
+
+## Import an existing screenshot or reference
+
+No browser package is needed. Add this entry to the `extensions` array in `design/project.json` (keep any existing extensions):
+
+```json
+{ "module": "builtin:files", "trusted": true }
+```
+
+Put the reference inside your project and save this request as `import.json`:
+
+```json
+{
+  "observer": "files/import",
+  "input": {
+    "path": "references/invitation.png",
+    "description": "Invitation screen captured by my agent while signed in"
+  }
+}
+```
+
+```sh
+npx anypixel-next observe --input import.json --json
+```
+
+Use the returned capture and artifact IDs with `read`, or pass the capture to a review. PNG, JPEG, Markdown, UTF-8 text, and JSON files up to 20 MB are supported. Import copies the bytes into a verified evidence bundle, so later edits to the original do not change the review.
+
+Descriptions are caller-supplied. An imported screenshot supplies no DOM or axe measurements. Browser checks report `not_assessed` when their required artifacts are absent; use `"checks": []` in a review request when you intend only a host visual assessment.
 
 ## Review a preview
 

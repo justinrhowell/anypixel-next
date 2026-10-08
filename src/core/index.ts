@@ -46,6 +46,7 @@ async function observe(root: string, raw: unknown, signal?: AbortSignal) {
         id: request.observer,
         input: request.input,
         allowedOrigins: c.allowedOrigins,
+        projectRoot: root,
       },
       signal,
       60000,
@@ -99,7 +100,7 @@ async function observe(root: string, raw: unknown, signal?: AbortSignal) {
     artifacts,
     limitations: [
       ...output.limitations,
-      'The relationship between this live page and the local source revision is not independently verified.',
+      'The relationship between this evidence and the local source revision is not independently verified.',
     ],
   });
   await publish(root, id, result, files);
@@ -115,7 +116,7 @@ function html(
   task: string,
   screenshots: { id: string; mime: string; base64: string }[],
 ) {
-  return `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'"><title>Design review</title><style>body{max-width:1000px;margin:40px auto;padding:0 24px;font:17px/1.6 system-ui;color:#20252a;background:#fafaf7}h1{font-size:36px}article,section{border-top:1px solid #aaa;padding:20px 0}p{max-width:78ch}small{color:#46515a}img{max-width:100%;border:1px solid #aaa}code{overflow-wrap:anywhere}li{margin:8px 0}</style><h1>Design review</h1><p>${esc(task)}</p><small>${esc(report.id)} · ${esc(report.createdAt)}</small><section><h2>What was assessed</h2><ul>${report.coverage.map((c) => `<li>${esc(c.check)}: <strong>${esc(c.result.status)}</strong> ${esc(c.result.limitations.join(' '))}</li>`).join('')}</ul><p>${esc(report.comparison)}</p></section><section><h2>Findings (${report.findings.length})</h2>${report.findings.map((f) => `<article><small>${esc(f.priority)} · ${esc(f.basis)} · ${esc(f.author)}</small><h3>${esc(f.claim)}</h3><p>${esc(f.goalRelevance)}</p><p><strong>Suggested action:</strong> ${esc(f.proposedAction)}</p><p>${esc(f.uncertainty)}</p><small>Evidence: ${esc(f.evidence.join(', '))}</small></article>`).join('') || '<p>No findings were returned by the selected checks. This is not a universal design or accessibility verdict.</p>'}</section><section><h2>Limits and remaining work</h2><ul>${report.limitations.map((l) => `<li>${esc(l)}</li>`).join('')}</ul></section><section><h2>Captured screens</h2>${screenshots.map((s) => `<figure><img alt="Screen captured in ${esc(s.id)}" src="data:${s.mime};base64,${s.base64}"><figcaption>${esc(s.id)}</figcaption></figure>`).join('') || '<p>No screen was captured.</p>'}</section></html>`;
+  return `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'"><title>Design review</title><style>body{max-width:1000px;margin:40px auto;padding:0 24px;font:17px/1.6 system-ui;color:#20252a;background:#fafaf7}h1{font-size:36px}article,section{border-top:1px solid #aaa;padding:20px 0}p{max-width:78ch}small{color:#46515a}img{max-width:100%;border:1px solid #aaa}code{overflow-wrap:anywhere}li{margin:8px 0}</style><h1>Design review</h1><p>${esc(task)}</p><small>${esc(report.id)} · ${esc(report.createdAt)}</small><section><h2>What was assessed</h2><ul>${report.coverage.map((c) => `<li>${esc(c.check)}: <strong>${esc(c.result.status)}</strong> ${esc(c.result.limitations.join(' '))}</li>`).join('')}</ul><p>${esc(report.comparison)}</p></section><section><h2>Findings (${report.findings.length})</h2>${report.findings.map((f) => `<article><small>${esc(f.priority)} · ${esc(f.basis)} · ${esc(f.author)}</small><h3>${esc(f.claim)}</h3><p>${esc(f.goalRelevance)}</p><p><strong>Suggested action:</strong> ${esc(f.proposedAction)}</p><p>${esc(f.uncertainty)}</p><small>Evidence: ${esc(f.evidence.join(', '))}</small></article>`).join('') || '<p>No findings were returned by the selected checks. This is not a universal design or accessibility verdict.</p>'}</section><section><h2>Limits and remaining work</h2><ul>${report.limitations.map((l) => `<li>${esc(l)}</li>`).join('')}</ul></section><section><h2>Visual evidence</h2>${screenshots.map((s) => `<figure><img alt="Visual evidence ${esc(s.id)}" src="data:${s.mime};base64,${s.base64}"><figcaption>${esc(s.id)}</figcaption></figure>`).join('') || '<p>No image evidence was supplied.</p>'}</section></html>`;
 }
 async function review(root: string, raw: unknown, signal?: AbortSignal) {
   const request = requests.review.parse(raw);

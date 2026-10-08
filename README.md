@@ -34,7 +34,7 @@ Already have Chrome? Skip the browser download and run `BROWSER_CHANNEL=chrome n
 
 Follow the [quickstart](docs/QUICKSTART.md) to install the CLI, connect an MCP client, and capture your own interface. Add the [starter skill](packs/starter/skills/design-partner/SKILL.md) to your agent to guide the workflow.
 
-The CLI and MCP expose the same five operations: context, observe, review, record, and read. Browser capture is optional; guidance and decisions work without a browser or a model API key.
+The CLI and MCP expose the same five operations: context, observe, review, record, and read. Import an existing screenshot or capture a live page with the optional browser extension. Guidance, decisions, and file import work without a browser or a model API key.
 
 ## Contribute
 

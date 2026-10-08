@@ -14,6 +14,7 @@ Project guidance, decisions, and evidence files
 | ---------------------- | ---------------------------------------------------------------------------------------- |
 | `src/core/`            | Context selection, decisions, evidence integrity, reviews, and extension execution       |
 | `src/cli/`, `src/mcp/` | Thin adapters over the same operations                                                   |
+| `src/observers/`       | Bundled file import through the standard extension API                                   |
 | `src/sdk/`             | Extension contracts                                                                      |
 | `extensions/web/`      | Optional Playwright capture and axe checks                                               |
 | `packs/`, `examples/`  | Editable guidance and examples of independent contributions                              |

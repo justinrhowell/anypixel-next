@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, rm, writeFile, access } from 'node:fs/promises';
+import { mkdtemp, rm, writeFile, readFile, access } from 'node:fs/promises';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { tmpdir } from 'node:os';
@@ -34,6 +34,21 @@ test('packed CLI installs outside the checkout without pulling in browser depend
     { cwd: temp },
   );
   assert.ok(JSON.parse(result.stdout).result.passages.length);
+  const configPath = path.join(temp, 'design/project.json');
+  const config = JSON.parse(await readFile(configPath, 'utf8'));
+  config.extensions = [{ module: 'builtin:files', trusted: true }];
+  await writeFile(configPath, JSON.stringify(config));
+  await writeFile(path.join(temp, 'reference.md'), '# A consumer-owned reference');
+  await writeFile(
+    path.join(temp, 'import.json'),
+    JSON.stringify({ observer: 'files/import', input: { path: 'reference.md' } }),
+  );
+  const imported = await run(
+    process.execPath,
+    [cli, 'observe', '--input', 'import.json', '--json'],
+    { cwd: temp },
+  );
+  assert.equal(JSON.parse(imported.stdout).result.artifacts[0].kind, 'files/document');
   await assert.rejects(access(path.join(temp, 'node_modules/playwright')));
   await assert.rejects(access(path.join(temp, 'node_modules/anypixel-next-web')));
 });
