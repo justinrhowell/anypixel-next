@@ -1,0 +1,55 @@
+{
+  "name": "anypixel-next",
+  "version": "0.1.0-alpha.0",
+  "private": true,
+  "description": "An editable design practice and evidence tools for existing AI agents.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "bin": {
+    "anypixel-next": "dist/cli/index.js"
+  },
+  "exports": {
+    ".": "./dist/core/index.js",
+    "./sdk": "./dist/sdk/index.js"
+  },
+  "files": [
+    "dist",
+    "packs",
+    "schemas",
+    "README.md",
+    "LICENSE",
+    "NOTICE",
+    "docs/QUICKSTART.md",
+    "docs/EXTENSIONS.md",
+    "docs/STATUS.md",
+    "examples/custom-check",
+    "examples/dense-product-ui",
+    "CONTRIBUTING.md"
+  ],
+  "workspaces": [
+    "extensions/web"
+  ],
+  "scripts": {
+    "build": "tsc && node scripts/schemas.mjs",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "test:browser": "npm run build && node --test tests/browser.test.mjs",
+    "demo": "npm run build && node scripts/demo.mjs",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.3.1",
+    "ajv": "8.20.0",
+    "picomatch": "4.0.7",
+    "yaml": "2.9.1",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.3.1",
+    "@types/node": "24.19.1",
+    "@types/picomatch": "4.0.3",
+    "typescript": "7.0.2"
+  }
+}

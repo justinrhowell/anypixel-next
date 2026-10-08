@@ -1,0 +1,7 @@
+AnyPixel Next
+Copyright 2026 AnyPixel Next contributors
+
+New runtime code and original practice content are licensed under Apache-2.0.
+Dependencies retain their own licenses. The approved proposal was developed in
+the AnyPixel repository; no legacy runtime or third-party reference imagery
+was copied into this implementation. See docs/TRANSFER.md.

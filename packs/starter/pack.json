@@ -1,0 +1,12 @@
+{
+  "apiVersion": 1,
+  "id": "anypixel/starter",
+  "version": "0.1.0-alpha.0",
+  "title": "Design Partner",
+  "description": "Improve interfaces against their goals, inspect evidence, and preserve useful project decisions.",
+  "owner": "AnyPixel Next contributors",
+  "license": "Apache-2.0",
+  "entries": [{ "id": "starter/practice", "kind": "guide", "path": "skills/design-partner/references/practice.md", "topics": ["design", "interface", "flow", "screen"] }],
+  "skills": ["skills/design-partner"],
+  "recommendedChecks": ["web/axe"]
+}

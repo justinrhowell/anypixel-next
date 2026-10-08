@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "idempotencyKey": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "contextId": {
+      "type": "string",
+      "pattern": "^(ctx|cap|rev|dec)_[0-9a-f-]{36}$"
+    },
+    "captureIds": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(ctx|cap|rev|dec)_[0-9a-f-]{36}$"
+      }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*\\/[a-z][a-z0-9-]*$"
+          },
+          "options": {
+            "default": {},
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "id",
+          "options"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "assessments": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "author": {
+            "type": "string",
+            "minLength": 1
+          },
+          "category": {
+            "type": "string",
+            "minLength": 1
+          },
+          "basis": {
+            "type": "string",
+            "enum": [
+              "measured",
+              "inferred",
+              "human"
+            ]
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "claim": {
+            "type": "string",
+            "minLength": 1
+          },
+          "goalRelevance": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "proposedAction": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uncertainty": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "author",
+          "category",
+          "basis",
+          "priority",
+          "claim",
+          "goalRelevance",
+          "evidence",
+          "proposedAction",
+          "uncertainty"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "baseReviewId": {
+      "type": "string",
+      "pattern": "^(ctx|cap|rev|dec)_[0-9a-f-]{36}$"
+    },
+    "ci": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "contextId",
+    "captureIds",
+    "assessments",
+    "ci"
+  ],
+  "additionalProperties": false
+}
