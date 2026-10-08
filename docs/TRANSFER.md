@@ -2,14 +2,14 @@
 
 Date: 2026-10-08. The project owner approved the new-product proposal, including Apache-2.0 for newly authored code and original practice content. This repository adopts that license for its new implementation. It does not relicense the original AnyPixel repository.
 
-| Source | Destination | Treatment and verification |
-| --- | --- | --- |
-| Original proposal authored in `anypixel/docs/next-product/` during this conversation | `docs/proposal/` | Preserved as the approved historical design; legacy-code references resolve to the original pinned GitHub commit |
-| Original proposed pack schema | `schemas/pack.schema.json` | Copied as the concrete manifest contract; validated during pack loading |
-| Original dense-product illustrative pack | `examples/dense-product-ui/` | Original text reused under the approved new license; metadata and README updated; remains experimental |
-| New runtime, browser extension, starter practice, demo fixture, tests, and operational docs | Current source tree | Authored for this repository; no legacy runtime copied |
-| Apache Software Foundation license text | `LICENSE`, `extensions/web/LICENSE` | Retrieved from `https://www.apache.org/licenses/LICENSE-2.0.txt` |
-| Third-party runtime/dev dependencies | `package-lock.json` | Exact resolved versions preserved; packages retain their own license files |
+| Source                                                                                      | Destination                                                                                                                          | Treatment and verification                                                                                       |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| Original proposal authored in `anypixel/docs/next-product/` during this conversation        | [Initial commit archive](https://github.com/justinrhowell/anypixel-next/tree/e651bbbffd826c250ec47daefaec520712360510/docs/proposal) | Preserved as the approved historical design; legacy-code references resolve to the original pinned GitHub commit |
+| Original proposed pack schema                                                               | `schemas/pack.schema.json`                                                                                                           | Copied as the concrete manifest contract; validated during pack loading                                          |
+| Original dense-product illustrative pack                                                    | `examples/dense-product-ui/`                                                                                                         | Original text reused under the approved new license; metadata and README updated; remains experimental           |
+| New runtime, browser extension, starter practice, demo fixture, tests, and operational docs | Current source tree                                                                                                                  | Authored for this repository; no legacy runtime copied                                                           |
+| Apache Software Foundation license text                                                     | `LICENSE`, `extensions/web/LICENSE`                                                                                                  | Retrieved from `https://www.apache.org/licenses/LICENSE-2.0.txt`                                                 |
+| Third-party runtime/dev dependencies                                                        | `package-lock.json`                                                                                                                  | Exact resolved versions preserved; packages retain their own license files                                       |
 
 The original audit baseline is AnyPixel commit `a72d884165f56efb07d4f4f04a4bf7b22c0e0029`. The proposal itself was uncommitted in that workspace when transferred; it is not falsely attributed to that commit. No external design reference imagery, private study outputs, or third-party research datasets were transferred.
 

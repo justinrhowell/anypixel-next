@@ -3,3 +3,8 @@ dist/
 .anypixel/
 *.tgz
 .DS_Store
+coverage/
+*.log
+.env
+.env.*
+!.env.example

@@ -6,4 +6,4 @@ Local evidence can contain sensitive screenshots and page content. Keep `.anypix
 
 Do not put secrets in a practice pack. Captured pages and pack text cannot authorize new executable modules. Input roots, origins, evidence references, and hashes are checked, but hashes are not signatures from an independent trusted observer.
 
-Before public release, configure a private vulnerability-reporting channel in the hosting repository and link it here. During local development, report security concerns directly to the project owner through an existing private channel; do not place credentials or exploit details in public issues.
+Report vulnerabilities through [GitHub's private reporting form](https://github.com/justinrhowell/anypixel-next/security/advisories/new). Do not include credentials or exploit details in public issues.

@@ -11,27 +11,15 @@
       "id": "dense/comparison",
       "kind": "guide",
       "path": "skills/improve-dense-screen/references/comparison.md",
-      "topics": [
-        "tables",
-        "comparison",
-        "information-density"
-      ]
+      "topics": ["tables", "comparison", "information-density"]
     },
     {
       "id": "dense/invoice-example",
       "kind": "example",
       "path": "skills/improve-dense-screen/references/invoice-example.md",
-      "topics": [
-        "tables",
-        "invoices",
-        "responsive"
-      ]
+      "topics": ["tables", "invoices", "responsive"]
     }
   ],
-  "skills": [
-    "skills/improve-dense-screen"
-  ],
-  "recommendedChecks": [
-    "web/axe"
-  ]
+  "skills": ["skills/improve-dense-screen"],
+  "recommendedChecks": ["web/axe"]
 }

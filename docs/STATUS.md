@@ -18,16 +18,16 @@ The demonstration's two introduced issues (an unnamed input and button) are foun
 
 ## Verified environment and integration scope
 
-| Component | Observed version / scope |
-| --- | --- |
-| Local runtime | Node 24.21.0; macOS arm64 |
-| Compiler | TypeScript 7.0.2 |
-| MCP SDK | Official server/client 2.3.1 |
-| Browser adapter | Playwright 1.64.0 |
-| Browser actually exercised | Installed Google Chrome 154.0.8037.98 |
-| Accessibility engine | axe-core 4.14.0 |
-| MCP verification | Official SDK client: discovery, structured results, working directory, image return, cancellation, and reconnect |
-| Package verification | Tarball install in a clean directory with spaces; actual installed CLI launcher; no Playwright/web package pulled into main install |
+| Component                  | Observed version / scope                                                                                                            |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Local runtime              | Node 24.21.0; macOS arm64                                                                                                           |
+| Compiler                   | TypeScript 7.0.2                                                                                                                    |
+| MCP SDK                    | Official server/client 2.3.1                                                                                                        |
+| Browser adapter            | Playwright 1.64.0                                                                                                                   |
+| Browser actually exercised | Installed Google Chrome 154.0.8037.98                                                                                               |
+| Accessibility engine       | axe-core 4.14.0                                                                                                                     |
+| MCP verification           | Official SDK client: discovery, structured results, working directory, image return, cancellation, and reconnect                    |
+| Package verification       | Tarball install in a clean directory with spaces; actual installed CLI launcher; no Playwright/web package pulled into main install |
 
 The SDK client test is **not** two independent host-certification results. No supported-host claim is made for Codex, Claude, Cursor, or another host. The Linux CI workflow is configured but has not been observed running remotely. Browser binaries are installed explicitly; existing Chrome was used locally.
 
@@ -45,4 +45,4 @@ The final local run passed **19 tests, with zero failures and zero skips**. Run 
 
 Decision scopes currently match concrete project-relative source paths, not route labels. Existing decision files can be edited directly; a public compare-and-swap update API is not implemented. Context selection is deterministic topic matching, not semantic retrieval. Interrupted keyed operations fail visibly rather than being silently repeated; after a crash, inspect artifacts and stale locks before retrying with a new key.
 
-The [approved proposal](proposal/README.md) remains the destination. These limitations describe the current alpha so future work can close explicit gaps instead of claiming the full specification is already shipped.
+The [roadmap](ROADMAP.md) tracks the next release steps. The [architecture](ARCHITECTURE.md) links to the historical proposal.

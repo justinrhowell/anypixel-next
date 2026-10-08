@@ -13,5 +13,13 @@
   "dependencies": {
     "axe-core": "4.14.0",
     "playwright": "1.64.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justinrhowell/anypixel-next.git",
+    "directory": "extensions/web"
+  },
+  "engines": {
+    "node": ">=24"
   }
 }

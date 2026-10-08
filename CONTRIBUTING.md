@@ -1,6 +1,6 @@
 # Contributing
 
-Start with `npm ci` and `npm test` on Node 24+. The local browser test requires `RUN_BROWSER=1` and an installed Playwright Chromium or `BROWSER_CHANNEL=chrome`.
+Start with `npm ci` and `npm run check` on Node 24+. Run `npm run format` before committing. The live browser test runs with `npm run test:browser`; install Playwright Chromium first or use `BROWSER_CHANNEL=chrome`. CI runs all tests, including browser capture.
 
 Useful contributions include a clearer example, a counterexample that breaks current guidance, a small regression fixture, a practice pack, or an observer/check. Design expertise does not require TypeScript. Mark untested guidance experimental and explain its scope. Do not include private customer data, credentials, or assets without distribution rights.
 

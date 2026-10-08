@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.anypixel/
+schemas/
+package-lock.json
+examples/demo/before.html
+LICENSE
+NOTICE
+extensions/web/LICENSE
